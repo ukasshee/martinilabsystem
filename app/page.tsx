@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Site } from "./site";
 
 export const metadata: Metadata = {
-  title: "Martini LabSystem | Laboratory equipment & solutions",
+  title: "Martini LabSystem | 20 lat doświadczenia",
   description:
-    "Laboratory equipment distribution backed by over 20 years of experience. Instruments, furniture, consumables and practical support.",
+    "Aparatura i wyposażenie laboratoryjne. Martini LabSystem łączy 20 lat doświadczenia z praktycznym doradztwem.",
 };
 
 export default function Home() {
