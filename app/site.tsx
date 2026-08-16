@@ -78,7 +78,6 @@ export function Site() {
         </div>
         <div className="canvas-copy open-hero-copy">
           <Brand />
-          <span className="blue-rule" />
           <p>{t.sub}</p>
           <ul className="activity-lines">{t.services.map(service => <li key={service}>{service}</li>)}</ul>
           <h1 id="hero-title">{t.line}</h1>
