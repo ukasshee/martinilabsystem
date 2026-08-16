@@ -8,6 +8,11 @@ type Lang = "pl" | "en" | "de";
 type Theme = "light" | "dark";
 
 const languageNames: Record<Lang, string> = { pl: "Polski", en: "English", de: "Deutsch" };
+const themeNames: Record<Lang, Record<Theme, string>> = {
+  pl: { light: "Jasny", dark: "Ciemny" },
+  en: { light: "Light", dark: "Dark" },
+  de: { light: "Hell", dark: "Dunkel" },
+};
 
 const copy = {
   pl: { line: "20 lat doświadczenia.", sub: "Technologia dla laboratoriów", eyebrow: "Precyzja · doświadczenie · zaufanie", product: "Technologia laboratoryjna", contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
@@ -48,19 +53,18 @@ export function Site() {
     setCookies(false);
   };
 
+  const cycleLanguage = () => {
+    const languages: Lang[] = ["pl", "en", "de"];
+    setLang(languages[(languages.indexOf(lang) + 1) % languages.length]);
+  };
+
   return <div className="site-shell">
     <header className="header"><nav className="nav-island" aria-label="Main navigation">
       <Link href="/" aria-label="Martini LabSystem"><Brand /></Link>
       <div className="nav-tools">
-        <button className="theme-switch" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme}><span /><i>{theme === "light" ? "○" : "●"}</i></button>
-        <label className="lang-select">
-          <span aria-hidden="true">◎</span>
-          <select value={lang} onChange={event => setLang(event.target.value as Lang)} aria-label={t.language}>
-            {(["pl", "en", "de"] as Lang[]).map(code => <option key={code} value={code}>{languageNames[code]}</option>)}
-          </select>
-          <i aria-hidden="true">⌄</i>
-        </label>
-        <a className="nav-cta" href="mailto:biuro@martinilabsystem.pl">{t.contact}</a>
+        <button className="nav-control theme-switch" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme}><i aria-hidden="true">{theme === "light" ? "○" : "●"}</i><b>{themeNames[lang][theme]}</b></button>
+        <button className="nav-control language-control" type="button" onClick={cycleLanguage} aria-label={`${t.language}: ${languageNames[lang]}`} title={`${languageNames[lang]} · PL → EN → DE`}><i aria-hidden="true">◎</i><b>{lang.toUpperCase()}</b></button>
+        <a className="nav-control nav-cta" href="mailto:biuro@martinilabsystem.pl"><i aria-hidden="true">↗</i><b>{t.contact}</b></a>
       </div>
     </nav></header>
 
