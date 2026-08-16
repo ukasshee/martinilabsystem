@@ -8,11 +8,6 @@ type Lang = "pl" | "en" | "de";
 type Theme = "light" | "dark";
 
 const languageNames: Record<Lang, string> = { pl: "Polski", en: "English", de: "Deutsch" };
-const themeNames: Record<Lang, Record<Theme, string>> = {
-  pl: { light: "Jasny", dark: "Ciemny" },
-  en: { light: "Light", dark: "Dark" },
-  de: { light: "Hell", dark: "Dunkel" },
-};
 
 const copy = {
   pl: { line: "20 lat doświadczenia.", sub: "Technologia dla laboratoriów", eyebrow: "Precyzja · doświadczenie · zaufanie", product: "Technologia laboratoryjna", services: ["Aparatura laboratoryjna", "Meble laboratoryjne", "Sprzęt i akcesoria", "Odczynniki"], contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
@@ -28,6 +23,7 @@ export function Site() {
   const [lang, setLang] = useState<Lang>("pl");
   const [theme, setTheme] = useState<Theme>("light");
   const [cookies, setCookies] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const t = copy[lang];
 
   useEffect(() => {
@@ -53,18 +49,16 @@ export function Site() {
     setCookies(false);
   };
 
-  const cycleLanguage = () => {
-    const languages: Lang[] = ["pl", "en", "de"];
-    setLang(languages[(languages.indexOf(lang) + 1) % languages.length]);
-  };
-
   return <div className="site-shell">
     <header className="header"><nav className="nav-island" aria-label="Main navigation">
       <Link href="/" aria-label="Martini LabSystem"><Brand /></Link>
       <div className="nav-tools">
-        <button className="nav-control theme-switch" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme}><i aria-hidden="true">{theme === "light" ? "○" : "●"}</i><b>{themeNames[lang][theme]}</b></button>
-        <button className="nav-control language-control" type="button" onClick={cycleLanguage} aria-label={`${t.language}: ${languageNames[lang]}`} title={`${languageNames[lang]} · PL → EN → DE`}><i aria-hidden="true">◎</i><b>{lang.toUpperCase()}</b></button>
-        <a className="nav-control nav-cta" href="mailto:biuro@martinilabsystem.pl"><i aria-hidden="true">↗</i><b>{t.contact}</b></a>
+        <button className="nav-control theme-switch icon-control" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme} title={t.theme}><span className="theme-disc" aria-hidden="true" /></button>
+        <div className="language-menu" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setLanguageOpen(false); }}>
+          <button className="nav-control language-control icon-control" type="button" onClick={() => setLanguageOpen(open => !open)} aria-label={`${t.language}: ${languageNames[lang]}`} aria-expanded={languageOpen} title={languageNames[lang]}><span className={`flag-icon flag-${lang}`} aria-hidden="true" /></button>
+          {languageOpen && <div className="language-options">{(["pl", "en", "de"] as Lang[]).filter(code => code !== lang).map(code => <button key={code} type="button" onClick={() => { setLang(code); setLanguageOpen(false); }} aria-label={languageNames[code]} title={languageNames[code]}><span className={`flag-icon flag-${code}`} aria-hidden="true" /></button>)}</div>}
+        </div>
+        <a className="nav-control nav-cta icon-control" href="mailto:biuro@martinilabsystem.pl" aria-label={t.contact} title={t.contact}><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg></a>
       </div>
     </nav></header>
 
