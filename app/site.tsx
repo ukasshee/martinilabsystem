@@ -10,9 +10,9 @@ type Theme = "light" | "dark";
 const languageNames: Record<Lang, string> = { pl: "Polski", en: "English", de: "Deutsch" };
 
 const copy = {
-  pl: { line: "20 lat doświadczenia.", sub: "Technologia dla laboratoriów", eyebrow: "Precyzja · doświadczenie · zaufanie", product: "Technologia laboratoryjna", services: ["Aparatura laboratoryjna", "Meble laboratoryjne", "Sprzęt i akcesoria", "Odczynniki"], contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
-  en: { line: "20 years of experience.", sub: "Technology for laboratories", eyebrow: "Precision · experience · trust", product: "Laboratory technology", services: ["Laboratory instruments", "Laboratory furniture", "Equipment & accessories", "Reagents"], contact: "Contact", privacy: "Privacy policy", cookies: "Cookies", rights: "All rights reserved.", cookieTitle: "May we use cookies?", cookieText: "Essential storage remembers your language, theme and privacy choice.", essential: "Essential only", accept: "Accept", theme: "Change theme", language: "Site language" },
-  de: { line: "20 Jahre Erfahrung.", sub: "Technologie für Labore", eyebrow: "Präzision · Erfahrung · Vertrauen", product: "Labortechnologie", services: ["Laborgeräte", "Labormöbel", "Geräte & Zubehör", "Reagenzien"], contact: "Kontakt", privacy: "Datenschutz", cookies: "Cookies", rights: "Alle Rechte vorbehalten.", cookieTitle: "Dürfen wir Cookies verwenden?", cookieText: "Notwendiger Speicher merkt sich Sprache, Design und Datenschutzwahl.", essential: "Nur notwendige", accept: "Akzeptieren", theme: "Design wechseln", language: "Seitensprache" },
+  pl: { line: "20 lat doświadczenia w branży.", sub: "Technologia dla laboratoriów", product: "Technologia laboratoryjna", services: ["Aparatura laboratoryjna", "Meble laboratoryjne", "Sprzęt i akcesoria", "Odczynniki"], contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
+  en: { line: "20 years of industry experience.", sub: "Technology for laboratories", product: "Laboratory technology", services: ["Laboratory instruments", "Laboratory furniture", "Equipment & accessories", "Reagents"], contact: "Contact", privacy: "Privacy policy", cookies: "Cookies", rights: "All rights reserved.", cookieTitle: "May we use cookies?", cookieText: "Essential storage remembers your language, theme and privacy choice.", essential: "Essential only", accept: "Accept", theme: "Change theme", language: "Site language" },
+  de: { line: "20 Jahre Branchenerfahrung.", sub: "Technologie für Labore", product: "Labortechnologie", services: ["Laborgeräte", "Labormöbel", "Geräte & Zubehör", "Reagenzien"], contact: "Kontakt", privacy: "Datenschutz", cookies: "Cookies", rights: "Alle Rechte vorbehalten.", cookieTitle: "Dürfen wir Cookies verwenden?", cookieText: "Notwendiger Speicher merkt sich Sprache, Design und Datenschutzwahl.", essential: "Nur notwendige", accept: "Akzeptieren", theme: "Design wechseln", language: "Seitensprache" },
 } as const;
 
 function Brand() {
@@ -78,7 +78,6 @@ export function Site() {
         </div>
         <div className="canvas-copy open-hero-copy">
           <Brand />
-          <span className="hero-eyebrow">{t.eyebrow}</span>
           <span className="blue-rule" />
           <h1 id="hero-title">{t.line}</h1>
           <p>{t.sub}</p>
