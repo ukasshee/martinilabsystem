@@ -79,15 +79,15 @@ export function Site() {
         <div className="canvas-copy open-hero-copy">
           <Brand />
           <span className="blue-rule" />
-          <h1 id="hero-title">{t.line}</h1>
           <p>{t.sub}</p>
           <ul className="activity-lines">{t.services.map(service => <li key={service}>{service}</li>)}</ul>
-          <a className="hero-mail" href="mailto:biuro@martinilabsystem.pl">biuro@martinilabsystem.pl <span>↗</span></a>
+          <h1 id="hero-title">{t.line}</h1>
           <address className="company-details">
             <strong>Mariusz Martini · LabSystem</strong>
             <span>ul. Dobrego Pasterza 52/28 · 31-416 Kraków</span>
             <span>NIP 677 137 29 26 · REGON 121 164 883</span>
           </address>
+          <a className="hero-mail" href="mailto:biuro@martinilabsystem.pl">biuro@martinilabsystem.pl <span>↗</span></a>
         </div>
       </section>
     </main>

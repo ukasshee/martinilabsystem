@@ -51,4 +51,6 @@ footer{padding:18px 0 22px;background:var(--paper)}.footer-inner{width:min(1100p
 @media(max-width:760px){.brand .brand-wordmark{width:78px;gap:4px}.brand .brand-wordmark strong{font-size:10.5px}.brand .brand-wordmark small{font-size:6.2px}.nav-island>a .brand{gap:9px}}
 .open-hero-copy h1{max-width:480px;font-size:clamp(48px,4.4vw,66px);line-height:.98;letter-spacing:-.055em}.open-hero-copy .blue-rule{margin-bottom:31px}
 @media(max-width:760px){.open-hero-copy h1{font-size:clamp(39px,10vw,46px);line-height:1}.open-hero-copy .blue-rule{margin-bottom:25px}}
+.open-hero-copy>p{margin:0 0 21px}.open-hero-copy .activity-lines{margin-bottom:29px}.open-hero-copy h1{margin-bottom:0}.open-hero-copy .company-details{margin-top:26px;padding-top:19px}.open-hero-copy .company-details+.hero-mail{margin-top:22px}
+@media(max-width:760px){.open-hero-copy>p{margin-bottom:18px}.open-hero-copy .activity-lines{margin-bottom:23px}.open-hero-copy .company-details{margin-top:21px;padding-top:16px}.open-hero-copy .company-details+.hero-mail{margin-top:18px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important}}
