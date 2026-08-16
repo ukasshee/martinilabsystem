@@ -53,4 +53,6 @@ footer{padding:18px 0 22px;background:var(--paper)}.footer-inner{width:min(1100p
 @media(max-width:760px){.open-hero-copy h1{font-size:clamp(39px,10vw,46px);line-height:1}.open-hero-copy .blue-rule{margin-bottom:25px}}
 .open-hero-copy>p{margin:0 0 21px}.open-hero-copy .activity-lines{margin-bottom:29px}.open-hero-copy h1{margin-bottom:0}.open-hero-copy .company-details{margin-top:26px;padding-top:19px}.open-hero-copy .company-details+.hero-mail{margin-top:22px}
 @media(max-width:760px){.open-hero-copy>p{margin-bottom:18px}.open-hero-copy .activity-lines{margin-bottom:23px}.open-hero-copy .company-details{margin-top:21px;padding-top:16px}.open-hero-copy .company-details+.hero-mail{margin-top:18px}}
+.open-hero-copy>p{font-size:17px;letter-spacing:.13em}.open-hero-copy h1{max-width:440px;font-size:clamp(25px,2.2vw,33px);line-height:1.05;letter-spacing:-.035em}
+@media(max-width:760px){.open-hero-copy>p{font-size:15px;letter-spacing:.11em}.open-hero-copy h1{font-size:clamp(21px,5.5vw,24px);line-height:1.08}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important}}
