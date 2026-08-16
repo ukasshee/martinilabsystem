@@ -59,25 +59,23 @@ export function Site() {
     <main className="stage">
       <section className="canvas" aria-labelledby="hero-title">
         <div className="canvas-grid" aria-hidden="true" />
-        <div className="hero-layout">
-          <div className="canvas-copy hero-copy-panel">
-            <Brand />
-            <span className="hero-eyebrow">{t.eyebrow}</span>
-            <span className="blue-rule" />
-            <h1 id="hero-title">{t.line}</h1>
-            <p>{t.sub}</p>
-            <a className="hero-mail" href="mailto:biuro@martinilabsystem.pl">biuro@martinilabsystem.pl <span>↗</span></a>
-            <address className="company-details">
-              <strong>Mariusz Martini · LabSystem</strong>
-              <span>ul. Dobrego Pasterza 52/28 · 31-416 Kraków</span>
-              <span>NIP 677 137 29 26 · REGON 121 164 883</span>
-            </address>
-          </div>
-          <div className="product-panel">
-            <span className="product-orbit" aria-hidden="true" />
-            <Image className="centrifuge-image" src="/centrifuge-hero.png" alt="Nowoczesna wirówka laboratoryjna" width="1536" height="1024" priority />
-            <div className="product-caption"><span>01</span><strong>{t.product}</strong><i>LABSYSTEM</i></div>
-          </div>
+        <div className="hero-media">
+          <Image className="centrifuge-image" src="/centrifuge-detail.png" alt="Detal wirówki laboratoryjnej" width="1536" height="1024" priority />
+          <span className="hero-orbit" aria-hidden="true" />
+          <div className="hero-media-label"><span>01</span><strong>{t.product}</strong><i>LABSYSTEM</i></div>
+        </div>
+        <div className="canvas-copy open-hero-copy">
+          <Brand />
+          <span className="hero-eyebrow">{t.eyebrow}</span>
+          <span className="blue-rule" />
+          <h1 id="hero-title">{t.line}</h1>
+          <p>{t.sub}</p>
+          <a className="hero-mail" href="mailto:biuro@martinilabsystem.pl">biuro@martinilabsystem.pl <span>↗</span></a>
+          <address className="company-details">
+            <strong>Mariusz Martini · LabSystem</strong>
+            <span>ul. Dobrego Pasterza 52/28 · 31-416 Kraków</span>
+            <span>NIP 677 137 29 26 · REGON 121 164 883</span>
+          </address>
         </div>
       </section>
     </main>
