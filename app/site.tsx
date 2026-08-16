@@ -8,9 +8,9 @@ type Lang = "pl" | "en" | "de";
 type Theme = "light" | "dark";
 
 const copy = {
-  pl: { line: "20 lat doświadczenia.", sub: "Technologia dla laboratoriów", contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
-  en: { line: "20 years of experience.", sub: "Technology for laboratories", contact: "Contact", privacy: "Privacy policy", cookies: "Cookies", rights: "All rights reserved.", cookieTitle: "May we use cookies?", cookieText: "Essential storage remembers your language, theme and privacy choice.", essential: "Essential only", accept: "Accept", theme: "Change theme", language: "Site language" },
-  de: { line: "20 Jahre Erfahrung.", sub: "Technologie für Labore", contact: "Kontakt", privacy: "Datenschutz", cookies: "Cookies", rights: "Alle Rechte vorbehalten.", cookieTitle: "Dürfen wir Cookies verwenden?", cookieText: "Notwendiger Speicher merkt sich Sprache, Design und Datenschutzwahl.", essential: "Nur notwendige", accept: "Akzeptieren", theme: "Design wechseln", language: "Seitensprache" },
+  pl: { line: "20 lat doświadczenia.", sub: "Technologia dla laboratoriów", eyebrow: "Precyzja · doświadczenie · zaufanie", product: "Technologia laboratoryjna", contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
+  en: { line: "20 years of experience.", sub: "Technology for laboratories", eyebrow: "Precision · experience · trust", product: "Laboratory technology", contact: "Contact", privacy: "Privacy policy", cookies: "Cookies", rights: "All rights reserved.", cookieTitle: "May we use cookies?", cookieText: "Essential storage remembers your language, theme and privacy choice.", essential: "Essential only", accept: "Accept", theme: "Change theme", language: "Site language" },
+  de: { line: "20 Jahre Erfahrung.", sub: "Technologie für Labore", eyebrow: "Präzision · Erfahrung · Vertrauen", product: "Labortechnologie", contact: "Kontakt", privacy: "Datenschutz", cookies: "Cookies", rights: "Alle Rechte vorbehalten.", cookieTitle: "Dürfen wir Cookies verwenden?", cookieText: "Notwendiger Speicher merkt sich Sprache, Design und Datenschutzwahl.", essential: "Nur notwendige", accept: "Akzeptieren", theme: "Design wechseln", language: "Seitensprache" },
 } as const;
 
 function Brand() {
@@ -52,26 +52,33 @@ export function Site() {
       <div className="nav-tools">
         <button className="theme-switch" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme}><span /><i>{theme === "light" ? "○" : "●"}</i></button>
         <div className="lang-switch" aria-label={t.language}>{(["pl", "en", "de"] as Lang[]).map(code => <button key={code} className={lang === code ? "active" : ""} onClick={() => setLang(code)}>{code.toUpperCase()}</button>)}</div>
-        <a className="nav-cta" href="mailto:kontakt@martinilabsystem.pl">{t.contact}</a>
+        <a className="nav-cta" href="mailto:biuro@martinilabsystem.pl">{t.contact}</a>
       </div>
     </nav></header>
 
     <main className="stage">
       <section className="canvas" aria-labelledby="hero-title">
         <div className="canvas-grid" aria-hidden="true" />
-        <div className="canvas-copy">
-          <Brand />
-          <span className="blue-rule" />
-          <h1 id="hero-title">{t.line}</h1>
-          <p>{t.sub}</p>
-          <a href="mailto:kontakt@martinilabsystem.pl">kontakt@martinilabsystem.pl <span>↗</span></a>
-          <address className="company-details">
-            <strong>Mariusz Martini · LabSystem</strong>
-            <span>ul. Dobrego Pasterza 52/28 · 31-416 Kraków</span>
-            <span>NIP 677 137 29 26 · REGON 121 164 883</span>
-          </address>
+        <div className="hero-layout">
+          <div className="canvas-copy hero-copy-panel">
+            <Brand />
+            <span className="hero-eyebrow">{t.eyebrow}</span>
+            <span className="blue-rule" />
+            <h1 id="hero-title">{t.line}</h1>
+            <p>{t.sub}</p>
+            <a className="hero-mail" href="mailto:biuro@martinilabsystem.pl">biuro@martinilabsystem.pl <span>↗</span></a>
+            <address className="company-details">
+              <strong>Mariusz Martini · LabSystem</strong>
+              <span>ul. Dobrego Pasterza 52/28 · 31-416 Kraków</span>
+              <span>NIP 677 137 29 26 · REGON 121 164 883</span>
+            </address>
+          </div>
+          <div className="product-panel">
+            <span className="product-orbit" aria-hidden="true" />
+            <Image className="centrifuge-image" src="/centrifuge-hero.png" alt="Nowoczesna wirówka laboratoryjna" width="1536" height="1024" priority />
+            <div className="product-caption"><span>01</span><strong>{t.product}</strong><i>LABSYSTEM</i></div>
+          </div>
         </div>
-        <div className="glass-object" aria-hidden="true"><span /><span /><span /></div>
       </section>
     </main>
 
