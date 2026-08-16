@@ -7,6 +7,8 @@ import Link from "next/link";
 type Lang = "pl" | "en" | "de";
 type Theme = "light" | "dark";
 
+const languageNames: Record<Lang, string> = { pl: "Polski", en: "English", de: "Deutsch" };
+
 const copy = {
   pl: { line: "20 lat doświadczenia.", sub: "Technologia dla laboratoriów", eyebrow: "Precyzja · doświadczenie · zaufanie", product: "Technologia laboratoryjna", contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
   en: { line: "20 years of experience.", sub: "Technology for laboratories", eyebrow: "Precision · experience · trust", product: "Laboratory technology", contact: "Contact", privacy: "Privacy policy", cookies: "Cookies", rights: "All rights reserved.", cookieTitle: "May we use cookies?", cookieText: "Essential storage remembers your language, theme and privacy choice.", essential: "Essential only", accept: "Accept", theme: "Change theme", language: "Site language" },
@@ -51,7 +53,13 @@ export function Site() {
       <Link href="/" aria-label="Martini LabSystem"><Brand /></Link>
       <div className="nav-tools">
         <button className="theme-switch" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme}><span /><i>{theme === "light" ? "○" : "●"}</i></button>
-        <div className="lang-switch" aria-label={t.language}>{(["pl", "en", "de"] as Lang[]).map(code => <button key={code} className={lang === code ? "active" : ""} onClick={() => setLang(code)}>{code.toUpperCase()}</button>)}</div>
+        <label className="lang-select">
+          <span aria-hidden="true">◎</span>
+          <select value={lang} onChange={event => setLang(event.target.value as Lang)} aria-label={t.language}>
+            {(["pl", "en", "de"] as Lang[]).map(code => <option key={code} value={code}>{languageNames[code]}</option>)}
+          </select>
+          <i aria-hidden="true">⌄</i>
+        </label>
         <a className="nav-cta" href="mailto:biuro@martinilabsystem.pl">{t.contact}</a>
       </div>
     </nav></header>
