@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = { title: "Polityka prywatności" };
 
 export default function Privacy() {
   return <main className="privacy-page"><div className="privacy-shell">
-    <a className="privacy-back" href="/">← Martini LabSystem</a>
+    <Link className="privacy-back" href="/">← Martini LabSystem</Link>
     <p className="eyebrow"><span />PRYWATNOŚĆ I RODO</p><h1>Polityka prywatności</h1>
     <p className="privacy-lead">Jasna informacja o tym, jakie dane mogą być przetwarzane w serwisie Martini LabSystem i jakie prawa przysługują jego użytkownikom.</p>
     <article>

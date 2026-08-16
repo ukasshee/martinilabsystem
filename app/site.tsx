@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 type Lang = "pl" | "en" | "de";
 type Theme = "light" | "dark";
@@ -12,7 +14,7 @@ const copy = {
 } as const;
 
 function Brand() {
-  return <span className="brand"><img src="/favicon.svg" alt="" width="40" height="40" /><span><strong>MARTINI</strong><small>LABSYSTEM</small></span></span>;
+  return <span className="brand"><Image src="/favicon.svg" alt="" width="40" height="40" priority /><span><strong>MARTINI</strong><small>LABSYSTEM</small></span></span>;
 }
 
 export function Site() {
@@ -22,11 +24,14 @@ export function Site() {
   const t = copy[lang];
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("mls-lang") as Lang | null;
-    const savedTheme = localStorage.getItem("mls-theme") as Theme | null;
-    if (savedLang && copy[savedLang]) setLang(savedLang);
-    if (savedTheme === "light" || savedTheme === "dark") setTheme(savedTheme);
-    setCookies(!localStorage.getItem("mls-cookie-consent"));
+    const frame = requestAnimationFrame(() => {
+      const savedLang = localStorage.getItem("mls-lang") as Lang | null;
+      const savedTheme = localStorage.getItem("mls-theme") as Theme | null;
+      if (savedLang && copy[savedLang]) setLang(savedLang);
+      if (savedTheme === "light" || savedTheme === "dark") setTheme(savedTheme);
+      setCookies(!localStorage.getItem("mls-cookie-consent"));
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -43,7 +48,7 @@ export function Site() {
 
   return <div className="site-shell">
     <header className="header"><nav className="nav-island" aria-label="Main navigation">
-      <a href="/" aria-label="Martini LabSystem"><Brand /></a>
+      <Link href="/" aria-label="Martini LabSystem"><Brand /></Link>
       <div className="nav-tools">
         <button className="theme-switch" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme}><span /><i>{theme === "light" ? "○" : "●"}</i></button>
         <div className="lang-switch" aria-label={t.language}>{(["pl", "en", "de"] as Lang[]).map(code => <button key={code} className={lang === code ? "active" : ""} onClick={() => setLang(code)}>{code.toUpperCase()}</button>)}</div>
