@@ -19,6 +19,12 @@ function Brand() {
   return <span className="brand"><Image src="/favicon.svg" alt="" width="40" height="40" priority /><span><strong>MARTINI</strong><small>LABSYSTEM</small></span></span>;
 }
 
+function Flag({ lang }: { lang: Lang }) {
+  if (lang === "pl") return <svg className="flag-icon" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="8" fill="#fff" /><rect y="8" width="24" height="8" fill="#dc143c" /></svg>;
+  if (lang === "de") return <svg className="flag-icon" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.34" fill="#171717" /><rect y="5.33" width="24" height="5.34" fill="#d71920" /><rect y="10.66" width="24" height="5.34" fill="#ffce00" /></svg>;
+  return <svg className="flag-icon" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#163b72" /><path d="M0 0 24 16M24 0 0 16" stroke="#fff" strokeWidth="4" /><path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" strokeWidth="1.6" /><path d="M12 0v16M0 8h24" stroke="#fff" strokeWidth="5" /><path d="M12 0v16M0 8h24" stroke="#c8102e" strokeWidth="2.6" /></svg>;
+}
+
 export function Site() {
   const [lang, setLang] = useState<Lang>("pl");
   const [theme, setTheme] = useState<Theme>("light");
@@ -53,12 +59,12 @@ export function Site() {
     <header className="header"><nav className="nav-island" aria-label="Main navigation">
       <Link href="/" aria-label="Martini LabSystem"><Brand /></Link>
       <div className="nav-tools">
-        <button className="nav-control theme-switch icon-control" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme} title={t.theme}><span className="theme-disc" aria-hidden="true" /></button>
+        <button className="nav-control theme-switch icon-control" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme} title={t.theme}><svg className="theme-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17Z" /></svg></button>
         <div className="language-menu" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setLanguageOpen(false); }}>
-          <button className="nav-control language-control icon-control" type="button" onClick={() => setLanguageOpen(open => !open)} aria-label={`${t.language}: ${languageNames[lang]}`} aria-expanded={languageOpen} title={languageNames[lang]}><span className={`flag-icon flag-${lang}`} aria-hidden="true" /></button>
-          {languageOpen && <div className="language-options">{(["pl", "en", "de"] as Lang[]).filter(code => code !== lang).map(code => <button key={code} type="button" onClick={() => { setLang(code); setLanguageOpen(false); }} aria-label={languageNames[code]} title={languageNames[code]}><span className={`flag-icon flag-${code}`} aria-hidden="true" /></button>)}</div>}
+          <button className="nav-control language-control icon-control" type="button" onClick={() => setLanguageOpen(open => !open)} aria-label={`${t.language}: ${languageNames[lang]}`} aria-expanded={languageOpen} title={languageNames[lang]}><Flag lang={lang} /></button>
+          {languageOpen && <div className="language-options">{(["pl", "en", "de"] as Lang[]).filter(code => code !== lang).map(code => <button key={code} type="button" onClick={() => { setLang(code); setLanguageOpen(false); }} aria-label={languageNames[code]} title={languageNames[code]}><Flag lang={code} /></button>)}</div>}
         </div>
-        <a className="nav-control nav-cta icon-control" href="mailto:biuro@martinilabsystem.pl" aria-label={t.contact} title={t.contact}><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg></a>
+        <a className="nav-control nav-cta icon-control" href="mailto:biuro@martinilabsystem.pl" aria-label={t.contact} title={t.contact}><svg className="mail-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3.25" y="5.5" width="17.5" height="13" rx="2.75" /><path d="m4.5 7.25 7.5 5.5 7.5-5.5" /></svg></a>
       </div>
     </nav></header>
 
