@@ -16,7 +16,7 @@ const copy = {
 } as const;
 
 function Brand() {
-  return <span className="brand"><Image src="/favicon.svg" alt="" width="40" height="40" priority /><span><strong>MARTINI</strong><small>LABSYSTEM</small></span></span>;
+  return <span className="brand" aria-label="Martini LabSystem"><Image src="/favicon.svg" alt="" width="40" height="40" priority /><span className="brand-wordmark" aria-hidden="true"><strong>{[..."MARTINI"].map((letter, index) => <span key={`${letter}-${index}`}>{letter}</span>)}</strong><small>{[..."LABSYSTEM"].map((letter, index) => <span key={`${letter}-${index}`}>{letter}</span>)}</small></span></span>;
 }
 
 function Flag({ lang }: { lang: Lang }) {
