@@ -15,8 +15,8 @@ const copy = {
   de: { line: "20 Jahre Branchenerfahrung.", sub: "Technologie für Labore", product: "Labortechnologie", services: ["Laborgeräte", "Labormöbel", "Geräte & Zubehör", "Reagenzien"], contact: "Kontakt", close: "Schließen", privacy: "Datenschutz", cookies: "Cookies", rights: "Alle Rechte vorbehalten.", cookieTitle: "Dürfen wir Cookies verwenden?", cookieText: "Notwendiger Speicher merkt sich Sprache, Design und Datenschutzwahl.", essential: "Nur notwendige", accept: "Akzeptieren", theme: "Design wechseln", language: "Seitensprache" },
 } as const;
 
-function Brand() {
-  return <span className="brand" aria-label="Martini LabSystem"><Image src="/favicon.svg" alt="" width="40" height="40" priority /><span className="brand-wordmark" aria-hidden="true"><strong>{[..."MARTINI"].map((letter, index) => <span key={`${letter}-${index}`}>{letter}</span>)}</strong><small>{[..."LABSYSTEM"].map((letter, index) => <span key={`${letter}-${index}`}>{letter}</span>)}</small></span></span>;
+function Brand({ wordmark = true }: { wordmark?: boolean }) {
+  return <span className="brand" aria-label="Martini LabSystem"><Image src="/favicon.svg" alt="" width="40" height="40" priority />{wordmark && <span className="brand-wordmark" aria-hidden="true"><strong>{[..."MARTINI"].map((letter, index) => <span key={`${letter}-${index}`}>{letter}</span>)}</strong><small>{[..."LABSYSTEM"].map((letter, index) => <span key={`${letter}-${index}`}>{letter}</span>)}</small></span>}</span>;
 }
 
 function Flag({ lang }: { lang: Lang }) {
@@ -65,7 +65,7 @@ export function Site() {
 
   return <div className="site-shell">
     <header className="header"><nav className="nav-island" aria-label="Main navigation">
-      <Link href="/" aria-label="Martini LabSystem"><Brand /></Link>
+      <Link href="/" aria-label="Martini LabSystem"><Brand wordmark={false} /></Link>
       <div className="nav-tools">
         <button className="nav-control theme-switch icon-control" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme} title={t.theme}><svg className="theme-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17Z" /></svg></button>
         <div className="language-menu" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setLanguageOpen(false); }}>
