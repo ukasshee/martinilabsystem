@@ -10,9 +10,9 @@ type Theme = "light" | "dark";
 const languageNames: Record<Lang, string> = { pl: "Polski", en: "English", de: "Deutsch" };
 
 const copy = {
-  pl: { line: "20 lat doświadczenia w branży.", sub: "Technologie dla laboratoriów", product: "Technologia laboratoryjna", services: ["Aparatura laboratoryjna", "Meble laboratoryjne", "Sprzęt i akcesoria", "Odczynniki"], contact: "Kontakt", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
-  en: { line: "20 years of industry experience.", sub: "Technology for laboratories", product: "Laboratory technology", services: ["Laboratory instruments", "Laboratory furniture", "Equipment & accessories", "Reagents"], contact: "Contact", privacy: "Privacy policy", cookies: "Cookies", rights: "All rights reserved.", cookieTitle: "May we use cookies?", cookieText: "Essential storage remembers your language, theme and privacy choice.", essential: "Essential only", accept: "Accept", theme: "Change theme", language: "Site language" },
-  de: { line: "20 Jahre Branchenerfahrung.", sub: "Technologie für Labore", product: "Labortechnologie", services: ["Laborgeräte", "Labormöbel", "Geräte & Zubehör", "Reagenzien"], contact: "Kontakt", privacy: "Datenschutz", cookies: "Cookies", rights: "Alle Rechte vorbehalten.", cookieTitle: "Dürfen wir Cookies verwenden?", cookieText: "Notwendiger Speicher merkt sich Sprache, Design und Datenschutzwahl.", essential: "Nur notwendige", accept: "Akzeptieren", theme: "Design wechseln", language: "Seitensprache" },
+  pl: { line: "20 lat doświadczenia w branży.", sub: "Technologie dla laboratoriów", product: "Technologia laboratoryjna", services: ["Aparatura laboratoryjna", "Meble laboratoryjne", "Sprzęt i akcesoria", "Odczynniki"], contact: "Kontakt", close: "Zamknij", privacy: "Polityka prywatności", cookies: "Cookies", rights: "Wszelkie prawa zastrzeżone.", cookieTitle: "Czy możemy używać cookies?", cookieText: "Niezbędna pamięć zapisuje język, motyw i wybór prywatności.", essential: "Tylko niezbędne", accept: "Akceptuję", theme: "Zmień motyw", language: "Język strony" },
+  en: { line: "20 years of industry experience.", sub: "Technology for laboratories", product: "Laboratory technology", services: ["Laboratory instruments", "Laboratory furniture", "Equipment & accessories", "Reagents"], contact: "Contact", close: "Close", privacy: "Privacy policy", cookies: "Cookies", rights: "All rights reserved.", cookieTitle: "May we use cookies?", cookieText: "Essential storage remembers your language, theme and privacy choice.", essential: "Essential only", accept: "Accept", theme: "Change theme", language: "Site language" },
+  de: { line: "20 Jahre Branchenerfahrung.", sub: "Technologie für Labore", product: "Labortechnologie", services: ["Laborgeräte", "Labormöbel", "Geräte & Zubehör", "Reagenzien"], contact: "Kontakt", close: "Schließen", privacy: "Datenschutz", cookies: "Cookies", rights: "Alle Rechte vorbehalten.", cookieTitle: "Dürfen wir Cookies verwenden?", cookieText: "Notwendiger Speicher merkt sich Sprache, Design und Datenschutzwahl.", essential: "Nur notwendige", accept: "Akzeptieren", theme: "Design wechseln", language: "Seitensprache" },
 } as const;
 
 function Brand() {
@@ -30,6 +30,7 @@ export function Site() {
   const [theme, setTheme] = useState<Theme>("light");
   const [cookies, setCookies] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const t = copy[lang];
 
   useEffect(() => {
@@ -49,6 +50,13 @@ export function Site() {
     localStorage.setItem("mls-lang", lang);
     localStorage.setItem("mls-theme", theme);
   }, [lang, theme]);
+
+  useEffect(() => {
+    if (!contactOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setContactOpen(false); };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [contactOpen]);
 
   const consent = (choice: "essential" | "all") => {
     localStorage.setItem("mls-cookie-consent", choice);
@@ -81,17 +89,14 @@ export function Site() {
           <p>{t.sub}</p>
           <ul className="activity-lines">{t.services.map(service => <li key={service}>{service}</li>)}</ul>
           <h1 id="hero-title">{t.line}</h1>
-          <address className="company-details">
-            <strong>Mariusz Martini · LabSystem</strong>
-            <span>ul. Dobrego Pasterza 52/28 · 31-416 Kraków</span>
-            <span>NIP 677 137 29 26 · REGON 121 164 883</span>
-          </address>
-          <a className="hero-mail" href="mailto:biuro@martinilabsystem.pl">biuro@martinilabsystem.pl <span>↗</span></a>
+          <button className="hero-contact-button" type="button" onClick={() => setContactOpen(true)}>{t.contact}<span aria-hidden="true">↗</span></button>
         </div>
       </section>
     </main>
 
     <footer><div className="footer-inner"><span>© {new Date().getFullYear()} Martini LabSystem · {t.rights}</span><div><a href="/privacy">{t.privacy}</a><button onClick={() => setCookies(true)}>{t.cookies}</button></div></div></footer>
+
+    {contactOpen && <div className="contact-overlay"><button className="contact-backdrop" type="button" onClick={() => setContactOpen(false)} aria-label={t.close} /><section className="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title"><button className="contact-close" type="button" onClick={() => setContactOpen(false)} aria-label={t.close}>×</button><Brand /><p>{t.contact}</p><h2 id="contact-title">Mariusz Martini · LabSystem</h2><address><span>ul. Dobrego Pasterza 52/28</span><span>31-416 Kraków</span><span>NIP 677 137 29 26 · REGON 121 164 883</span></address><a href="mailto:biuro@martinilabsystem.pl">biuro@martinilabsystem.pl <span>↗</span></a></section></div>}
 
     {cookies && <section className="cookie-panel" role="dialog" aria-modal="true" aria-labelledby="cookie-title"><div><h2 id="cookie-title">{t.cookieTitle}</h2><p>{t.cookieText} <a href="/privacy#cookies">{t.privacy}</a></p></div><div className="cookie-actions"><button onClick={() => consent("essential")}>{t.essential}</button><button className="button" onClick={() => consent("all")}>{t.accept}</button></div></section>}
   </div>;
