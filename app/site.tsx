@@ -77,7 +77,7 @@ export function Site() {
 
   return <div className="site-shell">
     <header className="header"><nav className="nav-island" aria-label="Main navigation">
-      <Link href="/" aria-label="Martini LabSystem"><Brand wordmark={false} /></Link>
+      <Link href="/" aria-label="Martini LabSystem"><Brand /></Link>
       <div className="nav-tools">
         <button className="nav-control theme-switch icon-control" type="button" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label={t.theme} title={t.theme}><svg className="theme-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17Z" /></svg></button>
         <div className="language-menu" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setLanguageOpen(false); }}>
@@ -97,7 +97,7 @@ export function Site() {
           <div className="hero-media-label"><span>01</span><strong>{t.product}</strong><i>LABSYSTEM</i></div>
         </div>
         <div className="canvas-copy open-hero-copy">
-          <Brand />
+          <Brand wordmark={false} />
           <p>{t.sub}</p>
           <ul className="activity-lines">{t.services.map(service => <li key={service}>{service}</li>)}</ul>
           <h1 id="hero-title">{t.line}</h1>
